@@ -35,11 +35,13 @@ class ImageState extends StatefulWidget {
 class _ImageStateState extends State<ImageState> {
   int leftImageNumber = 1;
   int rightImageNumber = 2;
+  int centerImageNumber = 3;
 
-void changeImage(){
-leftImageNumber = Random().nextInt(8) + 1;
-rightImageNumber = Random().nextInt(8) + 1;
-}
+  void changeImage() {
+    leftImageNumber = Random().nextInt(8) + 1;
+    rightImageNumber = Random().nextInt(8) + 1;
+    centerImageNumber = Random().nextInt(8) + 1;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,11 @@ rightImageNumber = Random().nextInt(8) + 1;
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          leftImageNumber == rightImageNumber ? 'CONGRATULATIONS' : 'TRY AGAIN',
+          leftImageNumber == rightImageNumber &&
+                  centerImageNumber == leftImageNumber &&
+                  centerImageNumber == rightImageNumber
+              ? 'CONGRATULATIONS'
+              : 'TRY AGAIN',
           style: TextStyle(
             fontSize: 38.0,
             color: Colors.white,
@@ -66,7 +72,22 @@ rightImageNumber = Random().nextInt(8) + 1;
                     onPressed: () {
                       setState(() {
                         changeImage();
-                        print('left done');
+                      });
+                      print('left done');
+                    },
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextButton(
+                    child: Image.asset('images/image-$centerImageNumber.png'),
+                    style: flatButton,
+                    onPressed: () {
+                      setState(() {
+                        changeImage();
+                        print('done center');
                       });
                     },
                   ),
@@ -80,7 +101,7 @@ rightImageNumber = Random().nextInt(8) + 1;
                     style: flatButton,
                     onPressed: () {
                       setState(() {
-                     changeImage();
+                        changeImage();
                       });
                       print('right done');
                     },
