@@ -16,6 +16,7 @@ void main() {
   );
 }
 
+//this is the flat button styles for the text button
 final ButtonStyle flatButton = TextButton.styleFrom(
   primary: Colors.white,
   minimumSize: const Size(88, 36),
